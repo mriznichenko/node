@@ -7,6 +7,7 @@ const port = 3000
 const hostname = "127.0.0.1"
 const counterDB = "./counter.txt"
 
+console.log("git hello")
 
 
 const server = http.createServer((req, res) => {
