@@ -1,14 +1,13 @@
 const express = require('express')
+const http = require('http')
 const fs = require('fs')
 
 const app = express()
 app.use(express.static('public'))
+
 const port = 3000
 const hostname = "127.0.0.1"
 const counterDB = "./counter.txt"
-
-console.log("git hello")
-
 
 const server = http.createServer((req, res) => {
     res.statusCode = 200;
@@ -37,18 +36,10 @@ const rewriteCounter = (content) => {
     });
 }
 
-const incrementCounter = () => rewriteCounter((getCounter() + 1) + "")
-
-const show = () => console.log(getCounter())
-
-show()
-incrementCounter()
-
-show()
 
 app.get('/', (req, res) => {
     // console.log("localhost:3000 updated");
-    incrementCounter()
+    rewriteCounter((getCounter() + 1) + "") // increment counter
     //res.send("asdasdasd")
     res.send("" + getCounter())
 })
