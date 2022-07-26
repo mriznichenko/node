@@ -1,0 +1,10 @@
+
+login=student&password=12345
+     login=volunteer&password=qwerty
+login=mentor&password=qwerty123men&thor
+лівий рядок кирилицею
+some other shit
+
+undefined
+
+lol
