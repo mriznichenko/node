@@ -12,19 +12,94 @@
 
 <body>
     <h1>Практика</h1>
-    <h3>1</h3>
+    <!-- <h3>1</h3>
     <p>Створити на сторінці div, вказати йому id, зробити такі стилі, щоб він виглядав як чорний квадрат 100х100 пх.
         <br>Додати на сторінку кнопку, на кліку на цю кнопку блок повинен зникати.
     </p>
+    <p>Зникнення потрібно зробити всіма трьома способами (окрема кнопка під кожен спосіб):</p>
+    <ol>
+        <li>CSS (display: none), тобто. просто навісити стиль на елемент</li>
+        <li>JS (видалення елемента)</li>
+        <li>CSS+JS (навішувати на елемент клас hidden, а CSS прописати такі стилі щоб вони приховували все з класом hidden)</li>
+    </ol>
+    <button onclick="document.getElementById('frontJSpractice_1').style = 'display:none;'">By CSS</button>
+    <button onclick="practice1_way2()">By JS</button>
+    <button onclick="practice1_way3()">By CSS+JS</button>
+    <div id="frontJSpractice_1" class="square100" ><p>sdfsd</p></div>
+
+    
+
+    <h3>2</h3>
+    <p>Зробити те щоб по кліку на кнопку блок зникав, якщо він є, і щоб з'являвся, якщо він був прихований (метод CSS+JS).</p>
+
+    <button onclick="practice2()">Practice 2</button> 
 
 
-    <form name="myForm" onsubmit="return foo()" method="post">
-        Name: <input type="text" name="fname">
-        <input type="submit" value="Submit">
-    </form>
+    <h3>3</h3>
+    <p>(30 хвилин) Зробити на сторінці 5 таких блоків, дати їм всім однаковий клас, завдяки якому всі вони виглядатимуть
+        як чорні квадрати. Зробити так щоб вони всі одночасно ховалися/з'являлися після натискання на кнопку.</p>
+
+    <div style="display: inline-block;">
+        <div class="practice3 square100" style="display:inline-block;"></div>
+        <div class="practice3 square100" style="display:inline-block;"></div>
+        <div class="practice3 square100" style="display:inline-block;"></div>
+        <div class="practice3 square100" style="display:inline-block;"></div>
+        <div class="practice3 square100" style="display:inline-block;"></div>
+    </div>
+    <br>
+    <button onclick="practice3()">practice 3</button>
+
+    <h3>4</h3>
+    <p>(30 хвилин) Додати на сторінку інпут, в який можна ввести css selector (query selector) і при натисканні на
+        кнопку будуть ховатися/з'являтися елементи, які відповідають цьому селектору.</p>
+    <input type="text" id="practice4inputField">
+
+    <button onclick="practice4()">Practice 4</button>
+    -->
+
+
+    <h3>5</h3>
+    <p>(30 хвилин) Додати на сторінку жовтий квадрат, і зробити так щоб при натисканні на нього вперше виводилася напис
+        "Привіт" (alert), а при другому натисканні цей квадрат пропадав. (Потрібно змінювати функцію обробник, видаляти
+        першу і ставити другу)</p>
+    <div class="square100p5" id="IDpractice5" onclick="practice5()"></div>
+
+    <h3>6</h3>
+    <p>(30 хвилин) Додати на сторінку червоний квадрат 50х50 пх, який буде з'являтися як тільки людина наводить курсор
+        на кнопку, і ховатися як людина прибирає курсор з кнопки</p>
+
+    <div class="square50p6" id="IDpractice6" onclick="practice6()"></div>
+    <br>
+    <button onclick="alert('Practice 6 clicked')" onmouseover="practice6()" onmouseout="practice6()">Practice 6</button>
+
+
+    <h3>7</h3>
+    <p>(30 хвилин) Додати на сторінку зелений прямокутник 50х20 пх, який з'являтиметься як тільки людина фокусується на
+        інпуті і зникати як тільки людина починає писати текст у цей інпут.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <script src="script.js"></script>
-    
+
+
 </body>
 
 </html>

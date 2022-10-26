@@ -1,0 +1,23 @@
+.square100 {
+    background-color: black;
+    height: 100px;
+    width: 100px;
+}
+
+
+.hidden {
+    display: none;
+}
+
+.square100p5 {
+    background-color: yellow;
+    height: 100px;
+    width: 100px;
+}
+
+.square50p6 {
+    background-color: red;
+    height: 50px;
+    width: 50px;
+}
+
