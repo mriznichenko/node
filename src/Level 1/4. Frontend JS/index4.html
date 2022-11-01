@@ -55,7 +55,7 @@
     <input type="text" id="practice4inputField">
 
     <button onclick="practice4()">Practice 4</button>
-    -->
+    
 
 
     <h3>5</h3>
@@ -71,16 +71,28 @@
     <div class="square50p6" id="IDpractice6" onclick="practice6()"></div>
     <br>
     <button onclick="alert('Practice 6 clicked')" onmouseover="practice6()" onmouseout="practice6()">Practice 6</button>
-
+-->
 
     <h3>7</h3>
     <p>(30 хвилин) Додати на сторінку зелений прямокутник 50х20 пх, який з'являтиметься як тільки людина фокусується на
         інпуті і зникати як тільки людина починає писати текст у цей інпут.</p>
 
+    <div class="square5020p7" id="IDpractice7" style="visibility: hidden;"></div>
+    <input type="text" id="IDpractice7input" onfocus="practice7show()" oninput="practice7hide()"
+        onblur="practice7hide()">
 
 
+    <h3>8</h3>
+    <p>(30 хвилин) Додати на сторінку інпут та кнопку. Якщо в інпут покласти посилання, і натиснути на кнопку, то на
+        сторінці з'явиться картинка отримана за посиланням, яке ввели в інпут.</p>
 
 
+    <input type="text" id="IDpractice8input" value="https://upload.wikimedia.org/wikipedia/uk/9/9f/Shpp.jpg">
+    <button onclick="practice8AddImg()">Practice 8 add img</button>
+    <button onclick="document.getElementById('IDpractice8PictureField').innerHTML=''">remove img</button>
+    <br>
+    <br>
+    <div id="IDpractice8PictureField"></div>
 
 
 

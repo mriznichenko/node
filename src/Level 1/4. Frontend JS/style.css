@@ -21,3 +21,13 @@
     width: 50px;
 }
 
+.square5020p7 {
+    background-color: green;
+    height: 50px;
+    width: 20px;
+}
+
+.square5020p7:focus{
+    visibility: visible;
+}
+

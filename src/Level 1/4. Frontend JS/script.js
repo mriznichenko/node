@@ -51,3 +51,31 @@ function practice6() {
 }
 
 
+function practice7show() {
+    document.getElementById("IDpractice7").style.visibility = "visible";
+}
+
+function practice7hide() {
+    document.getElementById("IDpractice7").style.visibility = "hidden";
+}
+
+function practice8AddImg() {
+    let link = document.getElementById("IDpractice8input").value;
+    let img = `<img src="${link}" alt="alt text">`
+    fetch(link).then(function (response) {
+        return response;
+    }).then(function () {
+        document.getElementById("IDpractice8PictureField").innerHTML = `<br><br>${img}`
+    }).catch(function () {
+        document.getElementById("IDpractice8PictureField").innerHTML = "<br><br>Invalid image url"
+    });
+
+
+
+
+
+
+
+}
+
+
