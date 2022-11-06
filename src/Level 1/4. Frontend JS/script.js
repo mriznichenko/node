@@ -1,3 +1,10 @@
+/*
+питання, які виникали:
+- як запитати дозвіл на надання геоолкації у форматі, як питають зазвичай? я так і не зміг зайти
+
+*/
+
+
 function switchToNextVisibility(e) {
     return e === "none" ? "inherit" : "none";
 }
@@ -69,13 +76,53 @@ function practice8AddImg() {
     }).catch(function () {
         document.getElementById("IDpractice8PictureField").innerHTML = "<br><br>Invalid image url"
     });
+}
 
+function practice9addImgs() {
+    let links = document.getElementById("IDpractice9input").value;
+    let splited = links.split("\n").map(e => e.trim()).filter(e => e.length > 0)
+   
+    document.getElementById("IDpractice9PictureField").innerHTML = "";
+    for (let link of splited) {
+        let img = `<img src="${link}" alt="alt text">`
 
+        fetch(link).then(function (response) {
+            return response;
+        }).then(function (a) {
+            if (a.status == 200) {
+                document.getElementById("IDpractice9PictureField").innerHTML += `${img}<br>`
+            } else {
+                console.log(`bad url(${a.status}):`, link)
+            }
+        }).catch(function (e) {
+            console.log("bad url:", link)
+            console.log(e)
+        });
+    }
+    
+}
 
-
-
-
-
+// body onload
+function practice10trackMouse() {
+    addEventListener('mousemove', (e) => {
+        document.getElementById("IDpractice10pointerCoordinates").innerHTML = `X:${e.clientX}, Y:${e.clientY}`
+    });
 }
 
 
+function practice13saveLocalStorageInput() {
+    let inputValue = document.getElementById('IDLocalStorageInput').value;
+    window.localStorage.setItem('IDLocalStorageInput', inputValue);
+} 
+
+function practice13saveSessionStorageInput() {
+    let inputValue = document.getElementById('IDSessionStorageInput').value;
+    window.sessionStorage.setItem('IDSessionStorageInput', inputValue);
+} 
+
+function practice13saveCookiesInput() {
+    let inputValue = document.getElementById('IDCookiesInput').value;
+    console.log(document.cookie)
+    document.cookie = `IDCookiesInput=${inputValue}`;
+
+} 

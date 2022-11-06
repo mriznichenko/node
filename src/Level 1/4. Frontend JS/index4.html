@@ -71,7 +71,7 @@
     <div class="square50p6" id="IDpractice6" onclick="practice6()"></div>
     <br>
     <button onclick="alert('Practice 6 clicked')" onmouseover="practice6()" onmouseout="practice6()">Practice 6</button>
--->
+
 
     <h3>7</h3>
     <p>(30 хвилин) Додати на сторінку зелений прямокутник 50х20 пх, який з'являтиметься як тільки людина фокусується на
@@ -95,19 +95,91 @@
     <div id="IDpractice8PictureField"></div>
 
 
+    <h3>9</h3>
+    <p>(30 хвилин) Перетворити інпут в текстову область, в яку можна вводити посилання, кожну з нового рядка. При
+        натисканні на кнопку на сторінці з'явиться стільки картинок, скільки посилань ввели в текстову область (картинки
+        беруться за посиланнями).</p>
+    <textarea id="IDpractice9input" rows="6" cols="80">
+        https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/800px-HTML5_logo_and_wordmark.svg.png
+        
+      sdfsdfsdfsdfsdfsdfsdfsdf
+           https://
+
+        https://upload.wikimedia.org/wikipedia/uk/9/9f/Shpp.jpg
+
+    </textarea>
+    <br>
+    <button onclick="practice9addImgs()"> practice 9</button>
+
+    <div id="IDpractice9PictureField">the images will appear here </div>
 
 
+    <h3>10</h3>
+    <p>(30 хвилин) Зробити блок у правому верхньому кутку сторінки, в якому у форматі "Х: 123, У: 984" виводитимуться
+        координати курсору (оновлюватимуться в ріалтаймі)</p>
+
+    <div class="topcorner" id="IDpractice10pointerCoordinates"></div>
+
+    <script>
+        practice10trackMouse()
+    </script>
+   
+
+    
+    <h3>11</h3>
+    <p>(10 хвилин) Додати в блок у правому верхньому куті інформацію про те, яка мова обрана в браузері у користувача
+    </p>
 
 
+    <div class="topcorner" id="IDpractice11lang">
+        <script>
+            document.getElementById("IDpractice11lang").innerHTML = window.navigator.language
+        </script>
+    </div>
 
 
+    <h3>12</h3>
+    <p>(30 хвилин) Додати в блок в правому верхньому куті відображення широти та довготи на якій знаходиться людина
+        (формат: "Ш: 34.23234, Д: 78.239482034")</p>
+    <div class="topcorner" id="IDpractice12geo"> </div>
+
+    <script>
+        navigator.geolocation.getCurrentPosition(p => document.querySelector('#IDpractice12geo').textContent = `Ш: ${p.coords.latitude}, Д: ${p.coords.longitude}`);
+    </script>
+
+    -->
+
+    <h3>13</h3>
+    <p>(45 хвилин) Додати на сторінку три блоки і зробити текст усередині них редагованим, як в інпуті (але щоб це був
+        не нативний інпут). Те, що людина введе в ці "інпути", має в них і залишатися при перезавантаженні сторінки
+        (onload подія).
+        для першого використовувати localStorage
+        для другого використовувати cookies
+        для третього використовувати sessionStorage
+        (Загуглить у чому різниця між цими способами)</p>
+
+    <input id="IDLocalStorageInput" type="text" onchange="practice13saveLocalStorageInput()"> <label
+        for="IDLocalStorageInput">Local Storage</label>
+    <br>
+    <input id="IDCookiesInput" type="text" onchange="practice13saveCookiesInput()"> <label for="IDCookiesInput">cookies</label>
+    <br>
+    <input id="IDSessionStorageInput" type="text" onchange="practice13saveSessionStorageInput()"> <label
+        for="IDSessionStorageInput">Session Storage</label>
+
+    <script>
+        function practice13getCookie() {
+            return document.cookie.split(";").map(e => e.split("=")).reduce((a, [k, v]) => ({ ...a, [k.trim()]: decodeURIComponent(v) }), {});
+        }
+
+        document.getElementById("IDLocalStorageInput").value = localStorage.getItem('IDLocalStorageInput');
+        document.getElementById("IDSessionStorageInput").value = sessionStorage.getItem('IDSessionStorageInput');
+
+        let coo = practice13getCookie()
+        document.getElementById("IDCookiesInput").value = coo.IDCookiesInput;
+    </script>
 
 
-
-
-
-
-
+    <!-- todo: make all savings without mouse click out of input -->
 
     <script src="script.js"></script>
 

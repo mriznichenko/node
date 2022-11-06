@@ -27,7 +27,13 @@
     width: 20px;
 }
 
-.square5020p7:focus{
+.square5020p7:focus {
     visibility: visible;
 }
 
+
+.topcorner {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
