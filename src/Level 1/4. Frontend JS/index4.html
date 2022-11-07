@@ -2,17 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="favicon.png">
-    <link href="style.css" rel="stylesheet">
-    <title>Frontend JS</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+  <link href="style.css" rel="stylesheet">
+  <title>Frontend JS</title>
 </head>
 
 <body>
-    <h1>Практика</h1>
-    <!-- <h3>1</h3>
+  <h1>Практика</h1>
+  <!-- <h3>1</h3>
     <p>Створити на сторінці div, вказати йому id, зробити такі стилі, щоб він виглядав як чорний квадрат 100х100 пх.
         <br>Додати на сторінку кнопку, на кліку на цю кнопку блок повинен зникати.
     </p>
@@ -146,10 +146,11 @@
     <script>
         navigator.geolocation.getCurrentPosition(p => document.querySelector('#IDpractice12geo').textContent = `Ш: ${p.coords.latitude}, Д: ${p.coords.longitude}`);
     </script>
+-->
 
-    -->
-
-    <h3>13</h3>
+  <!-- todo: make all savings without mouse click out of input -->
+  <!--  
+ <h3>13</h3>
     <p>(45 хвилин) Додати на сторінку три блоки і зробити текст усередині них редагованим, як в інпуті (але щоб це був
         не нативний інпут). Те, що людина введе в ці "інпути", має в них і залишатися при перезавантаженні сторінки
         (onload подія).
@@ -178,10 +179,124 @@
         document.getElementById("IDCookiesInput").value = coo.IDCookiesInput;
     </script>
 
+-->
 
-    <!-- todo: make all savings without mouse click out of input -->
+  <!-- <h3>14</h3>
+  <p>Зробити кнопку, яка з'являється коли ми вже прогорнули екран вниз і
+    натисканням на яку людину плавно кидає нагору
+    сторінки.</p>
 
-    <script src="script.js"></script>
+
+  <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});"
+    id="scrollToTopButton"
+    title="This button scrolls to the top of the page">Scroll top</button>
+
+  <script>
+    // fill page
+    for (let i = 0; i < 100; i++) {
+      document.body.innerHTML += i + "<br>"
+    }
+
+    const showButtonOn = 300;
+
+    let scrollTopButton = document.getElementById("scrollToTopButton");
+
+    window.onscroll = function () {
+      // console.log("onscroll", document.documentElement.scrollTop)
+      scrollTopButton.style.display = document.documentElement.scrollTop > showButtonOn ? "block" : "none";
+    };
+  </script>
+ -->
+
+  <!-- <h3>15</h3>
+  <p>Зробити два блоки, один усередині іншого. Навішати на кожен із них слухач
+    кліку, який викликає алерт. Зробити так, щоб при натисканні на невеликий
+    викликався лише один алерт.</p>
+
+    <script>practice15init()</script>
+  <div id="IDpr15divParent"><div id="IDpr15divCHILD"></div></div> -->
+
+
+  <!-- <h3>16</h3>
+  <p>(30 хвилин) Зробити кнопку, натиснувши яку з'являється сірий напівпрозорий
+    квадрат на весь екран і не можна було скролити сторінку доки він не
+    сховається. Приховувати квадрат після натискання на нього.</p>
+
+  <div id="IDp16blocker" onclick="pr16unblockScroll()"></div>
+  <script>
+    // fill page
+    let n = 70;
+    for (let i = 0; i < 70; i++) {
+      document.body.innerHTML += i + "<br>"
+      if (i == n / 2) {
+        document.body.innerHTML += '<br><button id="IDpr16button" onclick="pr16blockScroll()">Block scrolling</button><br><br>'
+      }
+    }
+  </script> -->
+
+  <!-- <h3>17</h3>
+  <p>(10 хвилин) Дано: <br>&ltform>&ltinput type="submit"
+    value="GO">&lt/form><br>
+    Зробити так щоб при натисканні на кнопку "GO" не перезавантажувалася
+    сторінка.</p>
+
+    <form action="">
+      <input type="submit" value="GO" >
+    </form> 
+  -->
+
+
+  <h3>18</h3>
+  <p>* (1 година) Зробити гарний інпут type="file". Зробити щоб при
+    перетягуванні файлу цей інпут, він красиво змінювався (drag-n-drop). Ну і
+    коли файл вже вибраний теж</p>
+  <br>
+  <div id="inputBox">
+    <div id="arrowDragNDrop">🡇</div>
+    <input type="file" id="IDp18fileInput" value="dragndroptest"
+      onchange="foo()">
+  </div>
+
+  <script>
+    function foo(arg) {
+      console.log(document.querySelector("#IDp18fileInput"))
+      console.log(document.querySelector("#IDp18fileInput").files)
+      document.getElementById("inputBox").style.backgroundColor = "#ADFF2F"
+      document.getElementById("arrowDragNDrop").style.display = "none"
+    }
+    // foo(1)
+
+
+    addEventListener('dragover', (event) => {
+      document.getElementById("inputBox").style.backgroundColor = "purple";
+        document.getElementById("inputBox").style.color = "white";
+        console.log(event.target)
+      // if (event.target.classList.contains("inputBox")) {
+      //   document.getElementById("inputBox").style.backgroundColor = "purple";
+      //   document.getElementById("inputBox").style.color = "white";
+      // } else {
+      //   document.getElementById("inputBox").style.backgroundColor = "cornsilk";
+      //   document.getElementById("inputBox").style.color = "black";
+      // }
+
+    });
+
+
+
+
+    // addEventListener('dragend', (event) => {
+    //   document.getElementById("inputBox").style.backgroundColor = "cornsilk";
+    //   document.getElementById("inputBox").style.color = "black";
+    // });
+
+
+  </script>
+
+
+
+
+
+  <script src="script.js"></script>
 
 
 </body>

@@ -81,7 +81,7 @@ function practice8AddImg() {
 function practice9addImgs() {
     let links = document.getElementById("IDpractice9input").value;
     let splited = links.split("\n").map(e => e.trim()).filter(e => e.length > 0)
-   
+
     document.getElementById("IDpractice9PictureField").innerHTML = "";
     for (let link of splited) {
         let img = `<img src="${link}" alt="alt text">`
@@ -99,7 +99,7 @@ function practice9addImgs() {
             console.log(e)
         });
     }
-    
+
 }
 
 // body onload
@@ -113,16 +113,47 @@ function practice10trackMouse() {
 function practice13saveLocalStorageInput() {
     let inputValue = document.getElementById('IDLocalStorageInput').value;
     window.localStorage.setItem('IDLocalStorageInput', inputValue);
-} 
+}
 
 function practice13saveSessionStorageInput() {
     let inputValue = document.getElementById('IDSessionStorageInput').value;
     window.sessionStorage.setItem('IDSessionStorageInput', inputValue);
-} 
+}
 
 function practice13saveCookiesInput() {
     let inputValue = document.getElementById('IDCookiesInput').value;
     console.log(document.cookie)
     document.cookie = `IDCookiesInput=${inputValue}`;
 
-} 
+}
+
+function practice15init() {
+
+    document.getElementById("IDpr15divParent").addEventListener("click",
+        function (e) {
+            alert("parent")
+            e.stopPropagation()
+        }
+    );
+
+    document.getElementById("IDpr15divCHILD").addEventListener("click",
+        function (e) {
+            alert("child");
+            e.stopPropagation()
+        }
+    );
+}
+
+
+function pr16blockScroll() {
+    document.body.style.overflow = "hidden"
+    let scrollTop = document.documentElement.scrollTop;
+    document.getElementById("IDp16blocker").style.display = "block";
+    document.getElementById("IDp16blocker").style.top = scrollTop + "px"
+    document.getElementById("IDp16blocker").style.position = "absolute" 
+}
+
+function pr16unblockScroll() {
+    document.body.style.overflow = "scroll"
+    document.getElementById("IDp16blocker").style.display = "none";
+}

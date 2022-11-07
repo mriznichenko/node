@@ -1,39 +1,153 @@
+p {
+  max-width: 80ex;
+}
+
 .square100 {
-    background-color: black;
-    height: 100px;
-    width: 100px;
+  background-color: black;
+  height: 100px;
+  width: 100px;
 }
 
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .square100p5 {
-    background-color: yellow;
-    height: 100px;
-    width: 100px;
+  background-color: yellow;
+  height: 100px;
+  width: 100px;
 }
 
 .square50p6 {
-    background-color: red;
-    height: 50px;
-    width: 50px;
+  background-color: red;
+  height: 50px;
+  width: 50px;
 }
 
 .square5020p7 {
-    background-color: green;
-    height: 50px;
-    width: 20px;
+  background-color: green;
+  height: 50px;
+  width: 20px;
 }
 
 .square5020p7:focus {
-    visibility: visible;
+  visibility: visible;
 }
 
 
 .topcorner {
-    position: absolute;
-    top: 0;
-    right: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
+
+
+#scrollToTopButton {
+  display: none;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 99;
+  /* Make sure it does not overlap */
+
+  border: none;
+  outline: none;
+  background-color: #555;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+#scrollToTopButton:hover {
+  background-color: red;
+  /* Add a dark-grey background on hover */
+}
+
+#IDpr15divParent {
+  max-height: 200px;
+  max-width: 200px;
+  background-color: grey;
+  padding: 25px;
+}
+
+#IDpr15divCHILD {
+  background-color: black;
+  color: red;
+  height: 100px;
+  margin: 25px;
+}
+
+#IDp16blocker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  color: white;
+  opacity: 0.5;
+}
+
+
+/*
+dotted - Defines a dotted border
+dashed - Defines a dashed border
+solid - Defines a solid border
+double - Defines a double border
+groove - Defines a 3D grooved border. The effect depends on the border-color value
+ridge - Defines a 3D ridged border. The effect depends on the border-color value
+inset - Defines a 3D inset border. The effect depends on the border-color value
+outset - Defines a 3D outset border. The effect depends on the border-color value
+none - Defines no border
+hidden - Defines a hidden border
+*/
+
+#inputBox {
+  height: 300px;
+  max-width: 500px;
+  max-height: 400px;
+  background-color: cornsilk;
+  border-radius: 25px;
+  border: 5px dashed red;
+  /* padding: 50px; */
+
+
+  /* background-image: linear-gradient(blue, yellow); */
+}
+
+
+@keyframes arrowAnimation {
+  0% {
+    transform: translateY(0%)
+  }
+
+  50% {
+    transform: translateY(-10%)
+  }
+
+  100% {
+    transform: translateY(0px)
+  }
+}
+
+#arrowDragNDrop {
+  font-size: 10em;
+  animation: arrowAnimation 1s ease-in-out infinite;
+  margin-left: 160px
+}
+
+#IDp18fileInput {
+  position: absolute;
+  /* margin-left: 50px; */
+  top: 420px;
+  left: 160px;
+}
+/* 
+#inputBox:hover {
+  background-color: purple;
+  color: white;
+} */
