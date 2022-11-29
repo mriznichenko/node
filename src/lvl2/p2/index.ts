@@ -33,3 +33,26 @@
 
 // SOLUTION
 
+// 3.1 - скористайтесь async/await + Promise.all
+import fetch from 'node-fetch';
+async function getNamesA () {
+    let result = [];
+    const url = "https://random-data-api.com/api/name/random_name";
+
+    for (let i = 0; i < 3; i++) {
+        let responce = await fetch(url);
+        let data = await responce.json();
+        let name = await data.name;
+        result.push( name);
+    }
+    return result;
+}
+
+
+function printNames(input : Promise <string []>) :void{
+    input.then(names => console.log(names));
+}
+
+printNames(getNamesA())
+
+
