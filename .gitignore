@@ -1,2 +1,2 @@
 # Project exclude paths
-/src/Level 1/node_modules/
+**/node_modules
