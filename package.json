@@ -1,0 +1,19 @@
+{
+  "name": "ts-p1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "recompile": "rimraf ./dist/* && tsc",
+    "execute": "node ./dist/lvl2/p2/index.js",
+    "start": "npm run recompile && npm run execute"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.2"
+  }
+}
