@@ -1,3 +1,22 @@
+////////////////////////
+// NOT FINISHED YET ! //
+////////////////////////
+
+/**
+ * 2.2.3.3
+ * 
+ * Напишіть функцію, яка повертає три імені, зробивши ПАРАЛЕЛЬНО 
+ * три запити на https://random-data-api.com/api/name/random_name
+ * 
+ * скористайтесь чисто промісами: без async/await, без Promise.all
+ * .... це може бути складно
+ */
+
+import fetch from 'node-fetch';
+
+const namesURL = "https://random-data-api.com/api/name/random_name";
+
+
 
 const https = require('https');
 // const tempurl = 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY';
@@ -33,38 +52,3 @@ const https = require('https');
 // }
 
 // console.log(syncRequest(tempurl))
-
-
-
-
-
-
-// asyncGetName().then( (e) => console.log("async: " + e)) // works
-
-// let data = https.get(namesURL, (e: any) => {
-//     console.log(e);
-//     console.log(e.data)
-// }); 
-
-// console.log(data)// works
-
-
-////////////////////////////////////////////////////////////////////////// UNDONE ABOVE
-
-
-
-
-
-
-
-
-
-
-// 2.2.4
-// Напишіть функцію , яка повинна за мінімальну кількість запитів отримати користувача жінку:
-// https://random-data-api.com/api/users/random_user
-// 1. без async/await
-// 2. з async/await
-
-const userURL = "https://random-data-api.com/api/users/random_user";
-
