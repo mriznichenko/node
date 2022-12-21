@@ -10,7 +10,6 @@
 
 import fetch from 'node-fetch';
 
-
 const baseURI = "https://random-data-api.com/api/v2/"
 const usersPath = "users"
 const options = {

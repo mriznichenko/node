@@ -13,11 +13,67 @@
  */
 
 
-
-
-
-
 const https = require('https');
+
+const baseURI = "https://random-data-api.com/api/v2/"
+const usersPath = "users"
+const options = {
+    /** users quantity; maximum allowed size is 100 */
+    size: 3, // 100
+    is_xml: true,
+    response_type: "json"
+}
+
+type User = {
+    gender: string;
+}
+
+function buildGetURI(baseURI: string, usersPath: string, options: object) {
+    const optionsInGetSyntax = Object.entries(options).map(entry => entry.join("="));
+    return baseURI + usersPath + "?" + optionsInGetSyntax.join("&")
+}
+
+function getUsers() {
+    let responce = https.get(buildGetURI(baseURI, usersPath, options))
+    console.log(responce)
+    // let data = responce.json();
+    // return data;
+}
+
+getUsers()
+
+function searchFemale(users: User[]) {
+    let femaleUser;
+    for (let user of users) {
+        if (user.gender === "Female") {
+            femaleUser = user;
+            break;
+        }
+    }
+    return femaleUser;
+}
+
+// async function getFemaleUser() {
+//     let requestsCounter = 0; // infinite-protection
+//     let female, data;
+
+//     while (female === undefined && requestsCounter < 100) {
+//         data = getUsers();
+//         female = searchFemale(data);
+//         requestsCounter++;
+//     }
+
+//     return female;
+// }
+
+// getFemaleUser().then(e => console.log(e))
+
+
+
+
+
+
+
 // const tempurl = 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY';
 
 // function syncRequest(url: string) {
