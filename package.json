@@ -3,7 +3,11 @@
   "scripts": {
     "recompile": "rimraf ./dist/* && tsc",
     "execute": "node ./dist/lvl2/p2/index.js",
-    "start": "npm run recompile && npm run execute"
+    "start": "npm run recompile && npm run execute",
+    "temp": "npm run recompile && ./dist/temp/temp.js",
+    "2.2.1": "npm run recompile && node ./dist/lvl2/p2/2.2.1.js",
+    "2.2.4.2": "npm run recompile && node ./dist/lvl2/p2/2.2.4.2.js"
+    
   },
   "dependencies": {
     "node-fetch": "^2.6.2"
