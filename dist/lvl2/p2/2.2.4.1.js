@@ -16,7 +16,7 @@ const baseURI = "https://random-data-api.com/api/v2/";
 const usersPath = "users";
 const options = {
     /** users quantity; maximum allowed size is 100 */
-    size: 100,
+    size: 3,
     is_xml: true,
     response_type: "json"
 };
