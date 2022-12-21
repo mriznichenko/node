@@ -1,32 +1,4 @@
 "use strict";
-/* 1.
-
-function getFirstWord(a) {
-  return a.split(/ +/)[0].length;
-}
-
-*/
-// // SOLUTION:
-// function getFirstWord(a : string) {
-// 	return a.split(/ +/)[0].length;
-// }
-/* 2.
-
-function getUserNamings(a) {
-  return {
-    fullname: a.name + " " + a.surname,
-    initials: a.name[0] + "." + a.surname[0]
-  };
-}
-
-*/
-// // SOLUTION:
-// function getUserNamings(a: {name : string, surname : string}) {
-//   return { 
-// 		fullname: a.name + " " + a.surname, 
-// 		initials: a.name[0] + "." + a.surname[0] 
-// 	};
-// }
 /* 3.
 
 // <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining>
