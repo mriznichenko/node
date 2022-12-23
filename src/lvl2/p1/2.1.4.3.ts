@@ -21,7 +21,7 @@ type MyType = {
   coolness?: number
 }
 
-function hey(a: MyType) {
+export function hey(a: MyType) {
   return "hey! i'm " + a.name()
     + (a.type === "cat" ? ("cuteness: " + a.cuteness) : ("coolness: " + a.coolness))
 }

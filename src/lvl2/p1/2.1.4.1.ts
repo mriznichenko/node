@@ -15,7 +15,7 @@ hey({name: () => "roma", cuteness: 100})
 hey({name: () => "vasya", coolness: 100})
 */
 
-function hey(a: {name: () => string, [a: string]: unknown} ) {
+export function hey(a: {name: () => string, [a: string]: unknown} ) {
     return "hey! i'm " + a.name();
 }
 hey({name: () => "roma", cuteness: 100})

@@ -17,14 +17,14 @@ const hello = async () => {
 hello().then(r => console.log(r)).catch(e => console.log("fail"))
 */
 
-function stringEntries(a : unknown[] | object) {
+export function stringEntries(a : unknown[] | object) {
   return Array.isArray(a) ? a : Object.keys(a)
 }
 
 async function world(a : number) {
   return "*".repeat(a)
 }
-const hello = async () => {
+export const hello = async () => {
  return await world(10)
 }
 hello().then(r => console.log(r)).catch(e => console.log("fail"))

@@ -2,6 +2,8 @@
 // NOT FINISHED YET ! //
 ////////////////////////
 
+// todo fix any type
+
 /**
  * 2.2.4.1
  * Напишіть функцію , яка повинна за мінімальну кількість запитів 
@@ -15,109 +17,89 @@
 
 const https = require('https');
 
-const baseURI = "https://random-data-api.com/api/v2/"
-const usersPath = "users"
+
+let uri = 'random-data-api.com/api/v2/users?size=1&response_type=json'
+
+const baseURI = "random-data-api.com"
+const usersPath = "/api/v2/users"
 const options = {
-    /** users quantity; maximum allowed size is 100 */
-    size: 3, // 100
-    is_xml: true,
-    response_type: "json"
+    size: 3, // max 100
+    // is_xml: true,
+    // response_type: "json"
 }
 
 type User = {
     gender: string;
 }
 
-function buildGetURI(baseURI: string, usersPath: string, options: object) {
-    const optionsInGetSyntax = Object.entries(options).map(entry => entry.join("="));
-    return baseURI + usersPath + "?" + optionsInGetSyntax.join("&")
-}
-
 function getUsers() {
-    let responce = https.get(buildGetURI(baseURI, usersPath, options))
-    console.log(responce)
-    // let data = responce.json();
-    // return data;
+    return new Promise((resolve) => {
+        const https = require('https');
+        let data = '';
+        https.request({
+            host: baseURI,
+            path: usersPath + "?size=3&response_type=json",
+        }, (res: any) => {
+
+            res.on('data', (chunk: string) => {
+                data += chunk;
+            });
+
+            res.on('end', () => {
+                console.log(data)
+            });
+        }).end();
+        resolve(data)
+    })
 }
 
-getUsers()
 
-function searchFemale(users: User[]) {
-    let femaleUser;
-    for (let user of users) {
-        if (user.gender === "Female") {
-            femaleUser = user;
-            break;
-        }
-    }
-    return femaleUser;
+
+function getUsersArray() : Promise<User[]> {
+    return new Promise<User[]>((resolve) => {
+        const https = require('https');
+        let data = '';
+        https.request({
+            host: baseURI,
+            path: usersPath + "?size=100&response_type=json",
+        }, (res: any) => {
+            res.on('data', (chunk: string) => {
+                data += chunk;
+            });
+
+            res.on('end', () => {
+                resolve(JSON.parse(data))
+            });
+        }).end();
+    })
 }
 
-// async function getFemaleUser() {
-//     let requestsCounter = 0; // infinite-protection
-//     let female, data;
+// function getFemaleUser() : Promise <User>{
+//     let femalePromise :Promise <User>;
+    
+//     femalePromise = getUsersArray().then(usersArr => {
+//         let fem : = searchFemale(usersArr);
+//         while(fem === undefined || fem?.gender !== "Female") {
+//             fem = getFemaleUser();
+//         }
+//         return fem;
+//     });
 
-//     while (female === undefined && requestsCounter < 100) {
-//         data = getUsers();
-//         female = searchFemale(data);
-//         requestsCounter++;
+//     return femalePromise;
+// }
+
+// function searchFemale(users: User[]) : User | undefined {
+//     let femaleUser;
+//     for (let user of users) {
+//         if (user.gender === "Female") {
+//             femaleUser = user;
+//             break;
+//         }
 //     }
-
-//     return female;
+//     return femaleUser;
 // }
 
 // getFemaleUser().then(e => console.log(e))
+getUsersArray().then(e => console.log(e))
 
-
-
-
-
-
-
-// const tempurl = 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY';
-
-// function syncRequest(url: string) {
-//     let out = "out plug value"
-
-//     return typeof https.get(url, (resp: any) => {
-//         let data = '';
-
-//         // A chunk of data has been received.
-//         resp.on('data', (chunk: any) => {
-//             data += chunk;
-//             console.log("chunk done");
-
-//         });
-
-//         // The whole response has been received. Print out the result.
-//         resp.on('end', () => {
-//             let forlog = JSON.parse(data).explanation
-//             // console.log(forlog);
-//             out = forlog
-//             return forlog
-//             console.log("end done");
-//         });
-
-//     }).on("error", (err: any) => {
-//         console.log("on done")
-//         console.log("Error: " + err.message);
-//     });
-
-//     return out
-// }
-
-// console.log(syncRequest(tempurl))
-
-
-
-
-
-
-// asyncGetName().then( (e) => console.log("async: " + e)) // works
-
-// let data = https.get(namesURL, (e: any) => {
-//     console.log(e);
-//     console.log(e.data)
-// }); 
-
-// console.log(data)// works
+export { }

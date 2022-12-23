@@ -12,7 +12,7 @@ function stringEntries(a) {
 }
 */
 
-function stringEntries(a : unknown[] | object) {
+export function stringEntries(a : unknown[] | object) {
   return Array.isArray(a) ? a : Object.keys(a)
 }
 

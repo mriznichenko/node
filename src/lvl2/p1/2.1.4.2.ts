@@ -30,7 +30,7 @@ class AbstractPet {
 class Cat extends AbstractPet { }
 class Dog extends AbstractPet { }
 
-function hey(abstractPet: { name: () => string }) {
+export function hey(abstractPet: { name: () => string }) {
     return "hey! i'm " + abstractPet.name();
 }
 let a = new Cat("myavchik", true)
