@@ -1,7 +1,3 @@
-////////////////////////
-// NOT FINISHED YET ! //
-////////////////////////
-
 /**
  * 2.2.4.1
  * Напишіть функцію , яка повинна за мінімальну кількість запитів 
@@ -12,31 +8,37 @@
  * без async/await
  */
 
-
-import https from 'https';
+import { IncomingMessage } from 'http'
+import { request } from 'https';
 
 const baseURI = "random-data-api.com"
 const usersPath = "/api/v2/users"
+const requestOptions = {
+    host: baseURI,
+    path: usersPath + "?size=1&response_type=json",
+}
 
 type User = {
     gender: string;
 }
 
-function getFemaleUser(): Promise<User> {
-    return new Promise<User>((resolve) => {
+function getFemaleUser(deepness?: number): Promise<User> {
+
+    return new Promise<User>((resolve, reject) => {
         let data = '';
-        https.request({
-            host: baseURI,
-            path: usersPath + "?size=100&response_type=json",
-        }, (response: any) => { // fixme any
+        let r = request(requestOptions, (response: IncomingMessage) => {
             response.on('data', (chunk: string) => {
                 data += chunk;
             });
             response.on('end', () => {
-                let femUser: User = JSON.parse(data).find((e: User) => e.gender === "Female");
+                let femUser: User = JSON.parse(data)
+                    .find((e: User) => e.gender === "Female");
+                
                 femUser?.gender === "Female"
                     ? resolve(femUser)
-                    : getFemaleUser().then(e => resolve(e));
+                    : (deepness ?? 0) > 10
+                        ? reject()
+                        : getFemaleUser(deepness ?? 1).then(e => resolve(e));
             });
         }).end();
     })
