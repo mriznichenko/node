@@ -13,7 +13,7 @@
  */
 
 
-const https = require('https');
+import https from 'https';
 
 const baseURI = "random-data-api.com"
 const usersPath = "/api/v2/users"
@@ -24,18 +24,15 @@ type User = {
 
 function getFemaleUser(): Promise<User> {
     return new Promise<User>((resolve) => {
-        const https = require('https');
         let data = '';
         https.request({
             host: baseURI,
             path: usersPath + "?size=100&response_type=json",
-        }, (res: any) => { // fixme any
-            res.on('data', (chunk: string) => {
+        }, (response: any) => { // fixme any
+            response.on('data', (chunk: string) => {
                 data += chunk;
             });
-            console.log("request")
-            console.log(typeof res)
-            res.on('end', () => {
+            response.on('end', () => {
                 let femUser: User = JSON.parse(data).find((e: User) => e.gender === "Female");
                 femUser?.gender === "Female"
                     ? resolve(femUser)
@@ -45,7 +42,6 @@ function getFemaleUser(): Promise<User> {
     })
 }
 
-// getFemaleUser().then(e => console.log(e))
 getFemaleUser().then(e => {
     console.log(e)
 })
