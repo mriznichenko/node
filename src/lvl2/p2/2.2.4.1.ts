@@ -2,8 +2,6 @@
 // NOT FINISHED YET ! //
 ////////////////////////
 
-// TODO todo fix any type
-
 /**
  * 2.2.4.1
  * Напишіть функцію , яка повинна за мінімальну кількість запитів 
@@ -31,22 +29,17 @@ function getFemaleUser(): Promise<User> {
         https.request({
             host: baseURI,
             path: usersPath + "?size=100&response_type=json",
-        }, (res: any) => {
+        }, (res: any) => { // fixme any
             res.on('data', (chunk: string) => {
                 data += chunk;
             });
             console.log("request")
+            console.log(typeof res)
             res.on('end', () => {
-                
-                 // FIXME what if all of 100 users array does not contains any female?
-                let femUser : User = JSON.parse(data).find((e: User) => e.gender === "Female")
-                if (femUser.gender === "Female") {
-                    resolve(femUser)
-                } else {
-                   
-                    getFemaleUser().then(e => resolve(e))
-                }
-                
+                let femUser: User = JSON.parse(data).find((e: User) => e.gender === "Female");
+                femUser?.gender === "Female"
+                    ? resolve(femUser)
+                    : getFemaleUser().then(e => resolve(e));
             });
         }).end();
     })
