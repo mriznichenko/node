@@ -2,7 +2,7 @@
 // NOT FINISHED YET ! //
 ////////////////////////
 
-// todo fix any type
+// TODO todo fix any type
 
 /**
  * 2.2.4.1
@@ -24,7 +24,7 @@ type User = {
     gender: string;
 }
 
-function getFemaleUser() : Promise<User> {
+function getFemaleUser(): Promise<User> {
     return new Promise<User>((resolve) => {
         const https = require('https');
         let data = '';
@@ -35,14 +35,27 @@ function getFemaleUser() : Promise<User> {
             res.on('data', (chunk: string) => {
                 data += chunk;
             });
-
+            console.log("request")
             res.on('end', () => {
-                resolve(JSON.parse(data).find( (e : User) => e.gender === "Female"))
+                
+                 // FIXME what if all of 100 users array does not contains any female?
+                let femUser : User = JSON.parse(data).find((e: User) => e.gender === "Female")
+                if (femUser.gender === "Female") {
+                    resolve(femUser)
+                } else {
+                   
+                    getFemaleUser().then(e => resolve(e))
+                }
+                
             });
         }).end();
     })
 }
 
-getFemaleUser().then(e => console.log(e))
+// getFemaleUser().then(e => console.log(e))
+getFemaleUser().then(e => {
+    console.log(e)
+})
+
 
 export { }
