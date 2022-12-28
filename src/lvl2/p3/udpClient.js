@@ -2,36 +2,39 @@
 // https://gist.github.com/sid24rane
 
 const udp = require('dgram')
-const conf = require('./config.json')
+const UDPsockectClosingTimeout = 5000; // ms
+const UDPport = 21000;
+const host = "0.0.0.0"
 
 const UDPclient = udp.createSocket('udp4') // creating a client socket
 
-UDPclient.on('message', (msg, info) => {
-    console.log('Data received from server : ' + msg.toString())
-    console.log(`Received ${msg.length} bytes from ${info.address}:${info.port}`)
-})
+function udpRequestLoop() {
+    let requestTime; 
+    
+    //send request to server
+    UDPclient.send(Buffer.from("some text"), UDPport, host, error => {
+        requestTime = new Date();
+        if (error) {
+            console.log("UDPclient.send error:", error)
+            UDPclient.close()
+        }
+    });
 
+    // get server response
+    UDPclient.on('message', (msg, info) => {
+        let responseTime = new Date();
+        let totalTime = responseTime - requestTime;
+        
+        let msgData = JSON.parse (msg.toString())
+        let aDate = new Date(msgData.timestamp)
+        console.log(msgData)
+        // console.log(aDate.toLocaleString("uk-UA", { timeZone: 'Europe/Kiev' }))
+    });
 
-//sending msg
-UDPclient.send(Buffer.from('MSG from UDP client'), conf.UDPport, conf.host, error => {
-    if (error) {
-        console.log(error)
+    setTimeout(() => {
         UDPclient.close()
-    } else {
-        console.log('Data sent !!!')
-    }
-})
+    }, UDPsockectClosingTimeout);
 
-//sending multiple msg
-UDPclient.send([Buffer.from('hello'), Buffer.from('world')], conf.UDPport, conf.host, error => {
-    if (error) {
-        console.log(error)
-        UDPclient.close()
-    } else {
-        console.log('Data sent !!!')
-    }
-})
+}
 
-setTimeout(() => {
-    UDPclient.close()
-}, conf.timeout)
+udpRequestLoop();

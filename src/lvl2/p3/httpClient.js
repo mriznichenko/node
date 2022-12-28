@@ -1,13 +1,5 @@
 const fetch = require("node-fetch")
-const os = require("os")
-const nl = os.EOL;
-
-const http = require("https")
-
 const myUrl = "https://testapp-mriznichenko.koyeb.app"
-// const myUrl = "http://127.0.0.1:8000"
-
-// fetch("https://testapp-mriznichenko.koyeb.app")
 
 class CustomResponse { 
     content;
@@ -33,4 +25,6 @@ function getReq() {
 }
 
 getReq()
+
+export {}
 

@@ -1,7 +1,4 @@
 {
-    "serverHost": "0.0.0.0",
     "UDPport": 21000,
-    "timeout": 5000,
-    "logdir": "../../../logs/2.3/server/",
-    "something" : true
+    "timeout": 5000
 }
