@@ -1,11 +1,10 @@
-//                             
 //   #    # ##### ##### #####  
 //   #    #   #     #   #    # 
 //   ######   #     #   #    # 
 //   #    #   #     #   #####  
 //   #    #   #     #   #      
 //   #    #   #     #   #      
-//                             
+
 console.log("\n" + new Date().toLocaleString("uk-UA", { timeZone: "Europe/Kiev" }));
 
 const os = require("os");
@@ -46,18 +45,17 @@ expressAppForGetReq.listen(httpPort, () => {
 //    ####  #####  #      
 //                    
 
-//emits when socket is ready and listening for datagram msgs
+UDPsocket.bind(udpPort)
+
 UDPsocket.on('listening', () => {
     console.log("UDP server listening:", UDPsocket.address());
 })
 
-// emits when any error occurs
 UDPsocket.on('error', (error) => {
     console.log("UDP server error:", error)
     UDPsocket.close()
 })
 
-// emits on new datagram msg
 UDPsocket.on('message', (msg, info) => {
     console.log("UDP server got incoming request:", { bodyBuffer: msg.toString(), info: info })
 
@@ -72,10 +70,9 @@ UDPsocket.on('message', (msg, info) => {
         }
     }
 
-    //sending msg
     UDPsocket.send(Buffer.from(JSON.stringify(response)), info.port, info.address, (error, bytes) => {
         if (error) {
-            console.log("UDP server error:", error);
+            console.log("UDP server response sending error:", error);
             client.close()
         } else {
             console.log("UDP server sent response:", response)
@@ -83,15 +80,11 @@ UDPsocket.on('message', (msg, info) => {
     })
 })
 
-
-
-
-//emits after the socket is closed using socket.close()
 UDPsocket.on('close', () => {
     console.log("UDP server closed")
 })
 
-UDPsocket.bind(udpPort)
+
 
 
 
