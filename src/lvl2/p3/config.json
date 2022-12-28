@@ -2,6 +2,6 @@
     "serverHost": "0.0.0.0",
     "UDPport": 21000,
     "timeout": 5000,
-    "logdir": "log/server/",
+    "logdir": "../../../logs/2.3/server/",
     "something" : true
 }
