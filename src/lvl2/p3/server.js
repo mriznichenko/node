@@ -60,13 +60,12 @@ UDPsocket.on('message', (msg, info) => {
     console.log("UDP server got incoming request:", { bodyBuffer: msg.toString(), info: info })
 
     const response = {
-        description: 'UDP server response test description',
-        serverPort: udpPort,
+        // description: 'UDP server response test description',
         timestamp: new Date().toJSON(),
         received: {
             message: msg.toString(),
             fromIP: info.address,
-            fromPort: info.port
+            // fromPort: info.port
         }
     }
 
