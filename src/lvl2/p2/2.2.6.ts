@@ -15,13 +15,12 @@ import fetch from "node-fetch"
 fun2(funCallback).then(e => console.log(e));
 
 async function funCallback(ip: string): Promise<string> {
-    return "funCallback output: inpit ip === " + ip;
+    return "funCallback output: ip === " + ip;
 }
 
 async function fun1(): Promise<string> {
     let resp = await fetch('https://api.ipify.org?format=json');
-    const { ip } = await resp.json();
-    return ip;
+    return (await resp.json()).ip;
 }
 
 async function fun2(param: CallableFunction): Promise<void> {
