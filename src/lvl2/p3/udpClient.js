@@ -1,7 +1,7 @@
 import dgram from 'dgram'
 
 // const UDPserverHost = "http://testapp-mriznichenko.koyeb.app/udp"
-// const UDPserverHost = "104.22.78.190"
+// const UDPserverHost = "104.22.78.190"/// koyeb server ip
 const UDPserverHost = "127.0.0.5"
 const UDPserverPort = 21000;
 
