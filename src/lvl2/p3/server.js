@@ -1,21 +1,26 @@
+console.log("\nserver script execution started on " + new Date().toLocaleString("uk-UA", { timeZone: "Europe/Kiev" }));
+
+import os from "os"
+import express from "express"
+import dgram from 'dgram'
+
+const expressApp = express();
+
+const httpPort = process.env.HTTP_PORT || 8000;
+const udpPort = process.env.UDP_PORT || 21000;
+
+const UDPsocket = dgram.createSocket('udp4'); // creating a udp server
+
+
+
 //   #    # ##### ##### #####  
 //   #    #   #     #   #    # 
 //   ######   #     #   #    # 
 //   #    #   #     #   #####  
 //   #    #   #     #   #      
-//   #    #   #     #   #      
+//   #    #   #     #   #  
 
-console.log("\n" + new Date().toLocaleString("uk-UA", { timeZone: "Europe/Kiev" }));
-
-const os = require("os");
-const express = require("express")
-const expressAppForGetReq = express();
-
-const httpPort = process.env.PORT || 8000;
-const udpPort = 21000;
-const udp = require('dgram')
-const UDPsocket = udp.createSocket('udp4'); // creating a udp server
-
+expressApp.bind("127.0.0.9")
 function createHttpResponse(msg, req) {
     let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
     let pureIP = ip.replace("::ffff:", "");
@@ -23,15 +28,15 @@ function createHttpResponse(msg, req) {
     return text;
 }
 
-expressAppForGetReq.get("/", (req, res) => {
+expressApp.get("/", (req, res) => {
     res.send(createHttpResponse("/", req));
 })
 
-expressAppForGetReq.get("/another", (req, res) => {
+expressApp.get("/another", (req, res) => {
     res.send(createHttpResponse("/another", req));
 })
 
-expressAppForGetReq.listen(httpPort, () => {
+expressApp.listen(httpPort, () => {
     console.log("http server listening on port " + httpPort)
 })
 
@@ -45,10 +50,14 @@ expressAppForGetReq.listen(httpPort, () => {
 //    ####  #####  #      
 //                    
 
-UDPsocket.bind(udpPort)
+UDPsocket.bind(udpPort, "127.0.0.5")
 
 UDPsocket.on('listening', () => {
     console.log("UDP server listening:", UDPsocket.address());
+})
+
+UDPsocket.on("/udp", () => {
+    console.log("UDP server reaction on /udp")
 })
 
 UDPsocket.on('error', (error) => {
@@ -61,11 +70,11 @@ UDPsocket.on('message', (msg, info) => {
 
     const response = {
         // description: 'UDP server response test description',
-        timestamp: new Date().toJSON(),
+        responseTimestamp: new Date().toJSON(),
         received: {
-            message: msg.toString(),
-            fromIP: info.address,
-            // fromPort: info.port
+            clientMessage: msg.toString(),
+            clientIP: info.address,
+            clientPort: info.port
         }
     }
 
@@ -97,3 +106,7 @@ UDPsocket.on('close', () => {
 //     #   #    # #      
 //     #    ####  #      
 //                       
+
+
+
+export {}

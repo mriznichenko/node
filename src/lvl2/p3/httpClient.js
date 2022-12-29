@@ -1,5 +1,6 @@
-const fetch = require("node-fetch")
-const myUrl = "https://testapp-mriznichenko.koyeb.app"
+import fetch from "node-fetch"
+// const serverAddress = "https://testapp-mriznichenko.koyeb.app"
+const serverAddress = "http://127.0.0.1:8000"
 
 class CustomResponse { 
     content;
@@ -12,7 +13,7 @@ class CustomResponse {
 
 function getReq() {
     let startTime = new Date()
-    fetch(myUrl)
+    fetch(serverAddress)
         .then(e => new CustomResponse(e.text()))
         .then(resp => {
             resp.content.then(content => {

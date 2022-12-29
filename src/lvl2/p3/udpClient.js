@@ -1,34 +1,43 @@
-// Example adapted from https://gist.github.com/sid24rane/6e6698e93360f2694e310dd347a2e2eb
-// https://gist.github.com/sid24rane
+import dgram from 'dgram'
 
-const udp = require('dgram')
-const UDPsockectClosingTimeout = 5000; // ms
-const UDPport = 21000;
-const host = "0.0.0.0"
+// const UDPserverHost = "http://testapp-mriznichenko.koyeb.app/udp"
+// const UDPserverHost = "104.22.78.190"
+const UDPserverHost = "127.0.0.5"
+const UDPserverPort = 21000;
 
-const UDPclient = udp.createSocket('udp4') // creating a client socket
+const UDPclientPort = 35000;
 
-function udpRequestLoop() {   
-    //send request to server
-    UDPclient.send(Buffer.from("some text"), UDPport, host, error => {
-        if (error) {
-            console.log("UDPclient.send error:", error)
-            UDPclient.close()
-        }
-    });
 
-    // get server response
-    UDPclient.on('message', (msg, info) => {        
-        let msgData = JSON.parse (msg.toString());
-        let timePassed = new Date() - new Date(msgData.timestamp);
-        console.log("server response:", msgData)
-        console.log("time passed:", timePassed.toLocaleString("uk-UA", { timeZone: 'Europe/Kiev' }), "ms")
-    });
+const UDPclient = dgram.createSocket('udp4') // creating a client socket
+console.log("UDP client socket opened")
+UDPclient.bind(UDPclientPort)
 
-    setTimeout(() => {
+//send request to server
+UDPclient.send(Buffer.from("some text"), UDPserverPort, UDPserverHost, error => {
+    console.log("UDP client sent request to server")
+    if (error) {
+        console.log("bbb")
+        console.log("UDPclient.send error:", error)
         UDPclient.close()
-    }, UDPsockectClosingTimeout);
+    }
+});
 
-}
 
-udpRequestLoop();
+// get server response
+UDPclient.on('message', (msg, info) => {
+    console.log("UDP client recieve server response")
+    let msgData = JSON.parse(msg.toString());
+    let timePassed = new Date() - new Date(msgData.responseTimestamp);
+
+    let response = {
+        message : msgData,
+        serverInfo : info,
+        timeBetweenRequestAndResponseInMs : timePassed//.toLocaleString("uk-UA", { timeZone: 'Europe/Kiev' }) + "ms"
+    }
+
+    console.log(response)
+    console.log("UDP client socket closed")
+    UDPclient.close()
+});
+
+export {}
