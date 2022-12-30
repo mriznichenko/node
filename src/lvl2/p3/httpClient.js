@@ -1,29 +1,13 @@
 import fetch from "node-fetch"
-// const serverAddress = "https://testapp-mriznichenko.koyeb.app"
-const serverAddress = "http://127.0.0.1:8000"
+import { httpServerAddress } from "./config.js";
 
-class CustomResponse {
-    content;
-    time;
-    constructor(content) {
-        this.content = content;
-        this.time = new Date();
-    }
-}
+let startTime = new Date();
 
-
-let startTime = new Date()
-fetch(serverAddress)
-    .then(e => new CustomResponse(e.text()))
-    .then(resp => {
-        resp.content.then(content => {
-            console.log("response:", content);
-            let totalTime = resp.time - startTime;
-            console.log("time passed: " + totalTime + " ms")
-        })
-    }
-    )
-
+fetch(httpServerAddress).then(e => e.json()).then(e => {
+    e.responseTimeUa = new Date(e.responseTime).toLocaleString("uk-UA", {timeZone: "Europe/Kiev"})
+    e.msPassed = new Date(e.responseTime) - startTime
+    console.log(e)
+});
 
 export { }
 

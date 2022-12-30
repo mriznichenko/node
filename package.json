@@ -21,8 +21,9 @@
     "2.2.5": "npm run recompile && node ./dist/lvl2/p2/2.2.5.js", 
 
     "2.3-server" : "nodemon src/lvl2/p3/server.js",
-    "2.3-http-client" : "node src/lvl2/p3/httpClient.js",
-    "2.3-udp-client" : "node src/lvl2/p3/udpClient.js"
+    "2.3-http-request" : "node src/lvl2/p3/httpClient.js",
+    "2.3-udp-request" : "node src/lvl2/p3/udpClient.js",
+    "2.3-tcp-request" : "node src/lvl2/p3/tcpClient.js"
   },
   "dependencies": {
     "express": "^4.18.2",

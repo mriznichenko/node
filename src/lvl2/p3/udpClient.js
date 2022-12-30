@@ -1,43 +1,33 @@
 import dgram from 'dgram'
+import { UDPserverHost, UDPserverPort, UDPclientPort } from './config.js';
 
-// const UDPserverHost = "http://testapp-mriznichenko.koyeb.app/udp"
-// const UDPserverHost = "104.22.78.190"/// koyeb server ip
-const UDPserverHost = "127.0.0.5"
-const UDPserverPort = 21000;
+const udpSocket = dgram.createSocket('udp4');
+console.log("UDP client socket is opened");
 
-const UDPclientPort = 35000;
+udpSocket.bind(UDPclientPort)
+console.log("UDP client socket bound on port " + UDPclientPort);
 
 
-const UDPclient = dgram.createSocket('udp4') // creating a client socket
-console.log("UDP client socket opened")
-UDPclient.bind(UDPclientPort)
-
-//send request to server
-UDPclient.send(Buffer.from("some text"), UDPserverPort, UDPserverHost, error => {
+udpSocket.send(Buffer.from("some text"), UDPserverPort, UDPserverHost, error => {
     console.log("UDP client sent request to server")
     if (error) {
-        console.log("bbb")
-        console.log("UDPclient.send error:", error)
-        UDPclient.close()
+        console.log("UDPclient.send() error:", error, "\nUDP client socket will shutdown");
+        udpSocket.close()
     }
 });
 
-
-// get server response
-UDPclient.on('message', (msg, info) => {
-    console.log("UDP client recieve server response")
+udpSocket.on('message', (msg, info) => {
+    console.log("UDP client recieved server response")
     let msgData = JSON.parse(msg.toString());
-    let timePassed = new Date() - new Date(msgData.responseTimestamp);
 
-    let response = {
+    let serverResponse = {
         message : msgData,
         serverInfo : info,
-        timeBetweenRequestAndResponseInMs : timePassed//.toLocaleString("uk-UA", { timeZone: 'Europe/Kiev' }) + "ms"
+        timeBetweenRequestAndResponseInMs : new Date() - new Date(msgData.responseTimestamp)//.toLocaleString("uk-UA", { timeZone: 'Europe/Kiev' }) + "ms"
     }
 
-    console.log(response)
-    console.log("UDP client socket closed")
-    UDPclient.close()
+    console.log("Server response:", serverResponse, "\nUDP client socket is closed")
+    udpSocket.close()
 });
 
 export {}

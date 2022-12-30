@@ -1,16 +1,5 @@
-console.log("\nserver script execution started on " + new Date().toLocaleString("uk-UA", { timeZone: "Europe/Kiev" }));
-
-import os from "os"
-import express from "express"
-import dgram from 'dgram'
-
-const expressApp = express();
-
-const httpPort = process.env.HTTP_PORT || 8000;
-const udpPort = process.env.UDP_PORT || 21000;
-
-const UDPsocket = dgram.createSocket('udp4'); // creating a udp server
-
+import { UDPserverHost, UDPserverPort, httpPort, tcpPort, tcpHost, uaDateString} from './config.js';
+console.log("\n---\nServer script execution started on " + uaDateString());
 
 
 //   #    # ##### ##### #####  
@@ -20,37 +9,45 @@ const UDPsocket = dgram.createSocket('udp4'); // creating a udp server
 //   #    #   #     #   #      
 //   #    #   #     #   #  
 
-expressApp.bind("127.0.0.9")
-function createHttpResponse(msg, req) {
-    let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
-    let pureIP = ip.replace("::ffff:", "");
-    let text = `${msg} response${os.EOL}request IP: ${pureIP}${os.EOL}${new Date().toLocaleString('uk-UA', { timeZone: 'Europe/Kiev' })} (UA)`;
-    return text;
+import express from "express"
+
+const httpSocket = express();
+
+function createHttpResponse(mountpath, req) {
+    return {
+        clientIP : (req.headers['x-forwarded-for'] ?? req.socket.remoteAddress).replace("::ffff:", ""),
+        mountpath: mountpath,
+        responseTime : new Date()
+    }
 }
 
-expressApp.get("/", (req, res) => {
+httpSocket.listen(httpPort, () => {
+    console.log("HTTP server listening port " + httpPort)
+})
+
+httpSocket.get("/", (req, res) => {
     res.send(createHttpResponse("/", req));
 })
 
-expressApp.get("/another", (req, res) => {
+httpSocket.get("/another", (req, res) => {
     res.send(createHttpResponse("/another", req));
 })
+      
 
-expressApp.listen(httpPort, () => {
-    console.log("http server listening on port " + httpPort)
-})
-
-
-//                        
 //   #    # #####  #####  
 //   #    # #    # #    # 
 //   #    # #    # #    # 
 //   #    # #    # #####  
 //   #    # #    # #      
 //    ####  #####  #      
-//                    
 
-UDPsocket.bind(udpPort, "127.0.0.5")
+
+import dgram from 'dgram'
+
+const UDPsocket = dgram.createSocket('udp4'); // creating a udp server
+
+UDPsocket.bind(UDPserverPort, UDPserverHost)
+console.log(`UDP socket bound on ${UDPserverHost}, port ${UDPserverPort} `)
 
 UDPsocket.on('listening', () => {
     console.log("UDP server listening:", UDPsocket.address());
@@ -69,12 +66,11 @@ UDPsocket.on('message', (msg, info) => {
     console.log("UDP server got incoming request:", { bodyBuffer: msg.toString(), info: info })
 
     const response = {
-        // description: 'UDP server response test description',
         responseTimestamp: new Date().toJSON(),
         received: {
-            clientMessage: msg.toString(),
             clientIP: info.address,
-            clientPort: info.port
+            clientPort: info.port,
+            clientMessage: msg.toString()
         }
     }
 
@@ -93,11 +89,6 @@ UDPsocket.on('close', () => {
 })
 
 
-
-
-
-
-
 //                       
 //   #####  ####  #####  
 //     #   #    # #    # 
@@ -108,5 +99,61 @@ UDPsocket.on('close', () => {
 //                       
 
 
+import net from 'net';
+const tcpSocket = net.createServer()
 
-export {}
+
+// emits when any error occurs
+tcpSocket.on('error', (error) => {
+    console.log("TCP server error:", error)
+    tcpSocket.close()
+})
+
+tcpSocket.listen(tcpPort, tcpHost, () => {
+    const address = tcpSocket.address()
+    console.log(`\nTCP server (${address.family}) listening at ${address.address}, port ${address.port}`);
+})
+
+const sockets = []
+
+tcpSocket.on('connection', sock => {
+    console.log(`TCP server сonnected with ${sock.remoteAddress}:${sock.remotePort}`);
+
+    sockets.push(sock)
+
+    sock.on('data', data => {
+        console.log(`TCP server data event. Data: ${data.toString()}. Received ${sock.bytesRead} bytes from ${sock.remoteAddress}:${sock.remotePort}`)
+
+        let timestp = new Date()
+        const response = {
+            serverPort: tcpPort,
+            serverResponseTimestamp: timestp.toJSON(),
+            serverReceived: {
+                message: data.toString(),
+                fromIP: sock.remoteAddress,
+                fromPort: sock.remotePort
+            }
+        }
+
+        // Write the data back to all the connected, the client will receive it as data from the server
+        sockets.forEach((sock, index, array) => {
+            sock.write(Buffer.from(JSON.stringify(response)))
+        })
+    })
+
+    // Add a 'close' event handler to this instance of socket
+    sock.on('close', data => {
+        let index = sockets.findIndex(o => {
+            return o.remoteAddress === sock.remoteAddress && o.remotePort === sock.remotePort
+        })
+
+        if (index !== -1) {
+            sockets.splice(index, 1)
+        }
+        console.log(`TCP connection with ${sock.remoteAddress}:${sock.remotePort} was closed.`)
+    })	// end sock.on
+})
+
+/////////////////
+
+export { }
