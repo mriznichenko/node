@@ -1,4 +1,4 @@
-import { UDPserverHost, UDPserverPort, HTTPserverPort, TCPserverPort, TCPserverHost, uaDateString} from './config.js';
+import { UDPserverHost, UDPserverPort, HTTPserverPort, TCPserverPort, TCPserverHost, uaDateString } from './config.js';
 console.log("\n---\nServer script execution started on " + uaDateString());
 
 
@@ -15,9 +15,9 @@ const httpSocket = express();
 
 function createHttpResponse(mountpath, req) {
     return {
-        clientIP : (req.headers['x-forwarded-for'] ?? req.socket.remoteAddress).replace("::ffff:", ""),
+        clientIP: (req.headers['x-forwarded-for'] ?? req.socket.remoteAddress).replace("::ffff:", ""),
         mountpath: mountpath,
-        responseTime : new Date()
+        responseTime: new Date()
     }
 }
 
@@ -32,7 +32,7 @@ httpSocket.get("/", (req, res) => {
 httpSocket.get("/another", (req, res) => {
     res.send(createHttpResponse("/another", req));
 })
-      
+
 
 //   #    # #####  #####  
 //   #    # #    # #    # 
@@ -130,6 +130,7 @@ tcpSocket.on('connection', sock => {
         const response = {
             serverPort: TCPserverPort,
             serverResponseTimestamp: timestp.toJSON(),
+            serverResponseTimestampUA: uaDateString(timestp),
             serverReceived: {
                 message: data.toString(),
                 fromIP: sock.remoteAddress,
