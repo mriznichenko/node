@@ -2,12 +2,13 @@
   "name": "pro-node",
   "type": "module",
   "scripts": {
-    "2.3-server" : "nodemon src/lvl2/p3/server.js",
-    "2.3-http-request" : "node src/lvl2/p3/httpClient.js",
-    "2.3-udp-request" : "node src/lvl2/p3/udpClient.js",
-    "2.3-tcp-request" : "node src/lvl2/p3/tcpClient.js",
+    "server" : "nodemon src/lvl2/p3/server.js",
+    
+    "http" : "node src/lvl2/p3/httpClient.js",
+    "udp" : "node src/lvl2/p3/udpClient.js",
+    "tcp" : "node src/lvl2/p3/tcpClient.js",
 
-    "test-2.3-clients" : "cd $(npm root) && cd ../src/lvl2/p3 && node httpClient.js && node udpClient.js && node tcpClient.js"
+    "test-clients" : "npm run http && npm run udp && npm run tcp"
   
   },
   "dependencies": {
