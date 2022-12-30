@@ -1,4 +1,4 @@
-import { UDPserverHost, UDPserverPort, httpPort, tcpPort, tcpHost, uaDateString} from './config.js';
+import { UDPserverHost, UDPserverPort, HTTPserverPort, TCPserverPort, TCPserverHost, uaDateString} from './config.js';
 console.log("\n---\nServer script execution started on " + uaDateString());
 
 
@@ -21,8 +21,8 @@ function createHttpResponse(mountpath, req) {
     }
 }
 
-httpSocket.listen(httpPort, () => {
-    console.log("HTTP server listening port " + httpPort)
+httpSocket.listen(HTTPserverPort, () => {
+    console.log("HTTP server listening port " + HTTPserverPort)
 })
 
 httpSocket.get("/", (req, res) => {
@@ -109,7 +109,7 @@ tcpSocket.on('error', (error) => {
     tcpSocket.close()
 })
 
-tcpSocket.listen(tcpPort, tcpHost, () => {
+tcpSocket.listen(TCPserverPort, TCPserverHost, () => {
     const address = tcpSocket.address()
     console.log(`\nTCP server (${address.family}) listening at ${address.address}, port ${address.port}`);
 })
@@ -126,7 +126,7 @@ tcpSocket.on('connection', sock => {
 
         let timestp = new Date()
         const response = {
-            serverPort: tcpPort,
+            serverPort: TCPserverPort,
             serverResponseTimestamp: timestp.toJSON(),
             serverReceived: {
                 message: data.toString(),
