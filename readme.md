@@ -1,11 +1,11 @@
-clone rep,
+clone this gh rep 
 
-Go to project root, run the terminal and execute
+, then go to project root and
 ```
 npm i
 ```
 
-, then run local server
+, then
 ```
 npm run 2.3-server
 ```
