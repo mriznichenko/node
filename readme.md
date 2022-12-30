@@ -7,7 +7,6 @@ cd "ENTER_DESTINATION_PATH_HERE" && git clone -b 2.3.branch https://github.com/m
 ```
 npm i
 ```
-this is new branch readme
 , then
 ```
 npm run 2.3-server
