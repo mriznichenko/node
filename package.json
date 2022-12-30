@@ -8,7 +8,7 @@
     "udp" : "node src/lvl2/p3/udpClient.js",
     "tcp" : "node src/lvl2/p3/tcpClient.js",
 
-    "test-clients" : "npm run http && npm run udp && npm run tcp"
+    "all-clients" : "npm run http && npm run udp && npm run tcp"
   
   },
   "dependencies": {
