@@ -13,13 +13,13 @@ git clone -b 2.3.branch https://github.com/mriznichenko/node/
 ```
 npm i
 ```
+
 , then run server
 ```
-npm run 2.3-server
+npm run server
 ```
 
 , then open another terminal and run all clients
-
 ```
-npm run test-2.3-clients
+npm run all-clients
 ```
