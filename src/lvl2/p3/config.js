@@ -7,9 +7,10 @@ export const HTTPserverPort = process.env.HTTP_PORT || 11000;
 export const HTTPserverAddress = "http://127.0.0.1:" + HTTPserverPort;
 
 // UDP
-export const UDPserverHost = "127.0.0.5";
+export const UDPserverHost = "127.0.0.1";
 export const UDPserverPort = process.env.UDP_PORT || 22000;
 export const UDPclientPort = 22001;
+export const UDPclientSocketTimeout = 5000;
 
 // TCP
 export const TCPserverPort = process.env.TCP_PORT ||33000;

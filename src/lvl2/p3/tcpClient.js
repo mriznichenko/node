@@ -1,3 +1,5 @@
+console.log("\nTCP client script execution started");
+
 import net from 'net';
 import {TCPserverPort, TCPserverHost, TCPclientPort} from "./config.js"
 
@@ -10,7 +12,7 @@ tcpClient.connect(TCPserverPort, TCPserverHost, function() {
 });
 
 tcpClient.on('data', data => {
-    console.log("Received:", JSON.parse(data));
+    console.log("TCP client received data:", JSON.parse(data));
     tcpClient.destroy();
 });
 

@@ -47,7 +47,7 @@ import dgram from 'dgram'
 const UDPsocket = dgram.createSocket('udp4'); // creating a udp server
 
 UDPsocket.bind(UDPserverPort, UDPserverHost)
-console.log(`UDP socket bound on ${UDPserverHost}, port ${UDPserverPort} `)
+console.log(`UDP socket opened and bound on ${UDPserverHost}, port ${UDPserverPort} `)
 
 UDPsocket.on('listening', () => {
     console.log("UDP server listening:", UDPsocket.address());
@@ -114,9 +114,11 @@ tcpSocket.listen(TCPserverPort, TCPserverHost, () => {
     console.log(`\nTCP server (${address.family}) listening at ${address.address}, port ${address.port}`);
 })
 
-const sockets = []
+
 
 tcpSocket.on('connection', sock => {
+    const sockets = []
+
     console.log(`TCP server сonnected with ${sock.remoteAddress}:${sock.remotePort}`);
 
     sockets.push(sock)
@@ -141,7 +143,6 @@ tcpSocket.on('connection', sock => {
         })
     })
 
-    // Add a 'close' event handler to this instance of socket
     sock.on('close', data => {
         let index = sockets.findIndex(o => {
             return o.remoteAddress === sock.remoteAddress && o.remotePort === sock.remotePort
@@ -151,7 +152,7 @@ tcpSocket.on('connection', sock => {
             sockets.splice(index, 1)
         }
         console.log(`TCP connection with ${sock.remoteAddress}:${sock.remotePort} was closed.`)
-    })	// end sock.on
+    })
 })
 
 /////////////////
