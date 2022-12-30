@@ -1,18 +1,17 @@
-Download code
+clone rep,
 
 Go to project root, run the terminal and execute
 ```
 npm i
 ```
 
-then
+, then run local server
 ```
 npm run 2.3-server
 ```
 
-then run another terminal and 
+, then open another terminal and
 
 ```
 npm run test-2.3-clients
 ```
-for send http, udp and tcp requests
