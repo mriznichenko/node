@@ -1,25 +1,19 @@
-create project folder and
-
-```
-cd "ENTER_DESTINATION_PATH_HERE"
-```
-
-, then clone the repo
+create project folder and navigate into it, clone the repo
 ```
 git clone -b 2.3.branch https://github.com/mriznichenko/node/ 
 ```
 
-, then install node modules
+, install modules
 ```
 npm i
 ```
 
-, then run server
+, run server
 ```
 npm run server
 ```
 
-, then open another terminal and run all clients
+, open another terminal and run all clients
 ```
 npm run all-clients
 ```
