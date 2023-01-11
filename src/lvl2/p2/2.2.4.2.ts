@@ -60,3 +60,5 @@ async function getFemaleUser() {
 
 getFemaleUser().then(e => console.log(e))
 
+export {}
+

@@ -35,3 +35,5 @@ function getNames(): Promise<string[]> {
 }
 
 getNames().then(e => console.log(e))
+
+export {}

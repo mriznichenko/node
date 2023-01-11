@@ -22,3 +22,5 @@ async function getNames() : Promise<string[]> {
 }
 
 getNames().then(names => console.log(names));
+
+export {}

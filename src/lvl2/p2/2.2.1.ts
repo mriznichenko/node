@@ -8,3 +8,4 @@
 import fetch from 'node-fetch';
 const getIP = async () => await (await fetch("https://api.ipify.org?format=json")).json();
 getIP().then(ipObj => console.log(ipObj));
+export { }
