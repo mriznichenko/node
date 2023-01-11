@@ -1,6 +1,5 @@
 {
   "name": "pro-node",
- 
   "scripts": {
     "recompile": "rimraf ./dist/* && tsc",
     "temp": "npm run recompile && node ./dist/temp/temp.js",

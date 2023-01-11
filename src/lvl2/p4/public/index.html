@@ -154,7 +154,6 @@ README:
           })
             .then(res => {console.log(res); return res.json()})
             .then((response) => {
-              console.log("sdfsdfsdfsdfsdfsdf")
               if (response.error === 'forbidden') {
                 this.step = 'login';
               } else {
