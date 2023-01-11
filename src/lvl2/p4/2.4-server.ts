@@ -11,8 +11,8 @@ app.listen(SERVER_PORT, () => {
 
 app.get('/', (req, res) => {
     let time = new Date().toLocaleString("uk-UA", { timeZone: "Europe/Kiev" });
-    res.send(`${time}: hello from port: ${SERVER_PORT}`);
-    console.log(`${time}: response sent`);
+    res.send(`${time} - hello from port: ${SERVER_PORT}`);
+    console.log(`${time} - got request, response was sent now`);
 })
 
 export { }
